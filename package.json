@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "jajs",
+  "version": "1.0.0",
+  "description": "Just Another Job Site",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realyashnag/JAJS.git"
+  },
+  "author": "Ayush Mathur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/realyashnag/JAJS/issues"
+  },
+  "homepage": "https://github.com/realyashnag/JAJS#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "jsonfile": "^5.0.0",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7",
+    "request": "^2.88.0",
+    "sitemap": "^2.1.0",
+    "sys": "0.0.1",
+    "url": "^0.11.0"
+  }
+}

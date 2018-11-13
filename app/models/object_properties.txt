@@ -1,0 +1,23 @@
+Jobs: 
+{
+    'title': "Software Engineer",
+    'company': "Episource" ,
+    'location': "Jaipur",
+    'job_description': "Induldging Job",
+    'skills_required': {
+        'Javascript': 3, 
+        'Python': 2,
+    }
+}
+
+Users:
+{
+    'name': "Yash Nag",
+    'location': "Jaipur",
+    'skills': {
+        'Javscript': 6, 
+        'C++': 5
+    }
+    
+    // interested_title
+}
