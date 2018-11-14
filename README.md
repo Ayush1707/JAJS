@@ -5,7 +5,7 @@
   * Get the most ideal job for your skillset and experience.
     
 ## How To Install:
-  * Download and Install [NPM](https://www.npmjs.com/) and [NodeJs] (https://nodejs.org/en/).
+  * Download and Install [NPM](https://www.npmjs.com/) and [NodeJs](https://nodejs.org/en/).
   * Clone this repository.
   * Run on the root folder:
 ```
