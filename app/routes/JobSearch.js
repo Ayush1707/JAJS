@@ -45,4 +45,18 @@ router.post('/selectedJobs', function(req, res) {
     res.json(eligible_jobs);
 });
 
+
+router.get('/getJobsByCompany/:query', function(req, res) {
+    var thisCompany = req.params.query;
+    var jobsDatabase = req.app.get('jobsDatabase');
+    
+    var company_jobs = [];
+    jobsDatabase.forEach(function(thisJob){
+        if (thisJob.company == thisCompany){
+            company_jobs.push(thisJob);
+        }
+    });
+    res.json(company_jobs);
+});
+
 module.exports = router;

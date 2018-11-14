@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
-var jobsDatabase = [];        // Jobs Database
+var jobsDatabase = [];          // Job Database
 
 // ======================== ROUTES
 var jobcreation = require('./app/routes/JobCreation.js', jobcreation);

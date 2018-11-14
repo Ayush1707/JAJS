@@ -10,6 +10,7 @@ var AppJAJS = angular.module("AppJAJS", ['ngMaterial', 'ngTable'])
     .accentPalette('green');
 });
 
+
 //================================ Services and Controllers
 
 // Angular Service for Jobs
