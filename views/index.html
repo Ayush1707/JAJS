@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="AppJAJS">
 <head>
     <title>JAJS: Find Jobs</title>
     
@@ -7,19 +7,142 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
     <link rel="stylesheet"; href="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.css">
 </head>
-<body>
-
-    <div ng-app="myApp" ng-controller="myCtrl">
-    First Name: <input type="text" ng-model="firstName"><br>
-    Last Name: <input type="text" ng-model="lastName"><br>
-    <br>
-    Full Name: {{firstName + " " + lastName}}
+<body ng-controller="bodyController as ctrl" ng-cloak>
+    <div ng-controller="postJobController">
+        <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding flex>
+            <h2>Post Job Here!</h2>
+            <div>
+                <md-input-container>
+                    <label>Job Title</label>
+                    <input ng-model="job.title">
+                </md-input-container>
+                
+                <md-input-container>
+                    <label>Job Company</label>
+                    <input ng-model="job.company">
+                </md-input-container>
+                
+                <md-input-container>
+                    <label>Location</label>
+                    <input ng-model="job.location">
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Job Description</label>
+                    <textarea ng-model="job.job_description" md-maxlength="200" rows="5" md-select-on-focus></textarea>
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Application URL</label>
+                    <input ng-model="job.application_url">
+                </md-input-container>
+                
+                <md-autocomplete
+                    ng-disabled="ctrl.isDisabled"
+                    md-no-cache="ctrl.noCache"
+                    md-selected-item="ctrl.selectedItem"
+                    md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                    md-search-text="ctrl.searchText"
+                    md-selected-item-change="ctrl.selectedItemChange(item)"
+                    md-items="item in ctrl.querySearch(ctrl.searchText)"
+                    md-item-text="item.display"
+                    md-min-length="0"
+                    placeholder="Add Required Skills...">
+                    <md-item-template>
+                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                        No Skills matching "{{ctrl.searchText}}" were found.
+                    </md-not-found>
+                </md-autocomplete>
+                
+                <p>Experience you require for the Job (in Years):</p>
+                <div ng-repeat="item in required_skills"> 
+                    <div layout>
+                        <div flex="10" layout layout-align="center center">
+                            <span class="md-body-1">{{item}}:</span>
+                        </div>
+                        <md-slider flex md-discrete ng-model="job.skills_required[item]" step="1" min="1" max="30" aria-label="rating">
+                        </md-slider>
+                    </div>
+                </div>
+                
+                <button class="md-raised md-primary md-button md-ink-ripple" type="button" ng-click="postJob(job)">Post Job<div class="md-ripple-container" style=""></div></button>
+            </div>
+      </md-content>
     </div>
     
-
+    <md-divider ng-if="!$last"></md-divider>
+    
+    <div ng-controller="searchJobsController">
+        <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding flex>
+            <h2>Find Jobs Here!</h2>
+            <div>
+                <md-input-container>
+                    <label>Name</label>
+                    <input ng-model="user.name">
+                </md-input-container>
+                
+                <md-input-container>
+                    <label>Location</label>
+                    <input ng-model="user.location">
+                </md-input-container>
+                
+                <md-input-container>
+                    <label>Contact Number</label>
+                    <input ng-model="user.contactnumber">
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Contact Email</label>
+                    <input ng-model="user.emailid" type="email">
+                </md-input-container>
+                
+                <md-autocomplete
+                    ng-disabled="ctrl.isDisabled"
+                    md-no-cache="ctrl.noCache"
+                    md-selected-item="ctrl.selectedItem"
+                    md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                    md-search-text="ctrl.searchText"
+                    md-selected-item-change="ctrl.selectedItemChange(item)"
+                    md-items="item in ctrl.querySearch(ctrl.searchText)"
+                    md-item-text="item.display"
+                    md-min-length="0"
+                    placeholder="Add Required Skills...">
+                    <md-item-template>
+                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                        No Skills matching "{{ctrl.searchText}}" were found.
+                    </md-not-found>
+                </md-autocomplete>
+                
+                <p>Experience you have (in Years):</p>
+                <div ng-repeat="item in user_skills"> 
+                    <div layout>
+                        <div flex="10" layout layout-align="center center">
+                            <span class="md-body-1">{{item}}:</span>
+                        </div>
+                        <md-slider flex md-discrete ng-model="user.skills[item]" step="1" min="1" max="30" aria-label="rating">
+                        </md-slider>
+                    </div>
+                </div>
+                
+                <button class="md-raised md-primary md-button md-ink-ripple" type="button" ng-click="getEligibleJobs(user)">Find Jobs<div class="md-ripple-container" style=""></div></button>
+            </div>
+        </md-content>
+    </div>
+    
     <!-- Javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-aria.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-route.min.js"></script>-->
+    
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.js"></script>
+    
+    <script src="app.js"></script>
 </body>
 </html>

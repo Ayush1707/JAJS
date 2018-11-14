@@ -30,7 +30,7 @@ function compareEligibility(thisCandidate, thisJob){
     return match_score;
 }
 
-router.post('/selectedJobs', function(req, res) {
+router.post('/eligibleJobs', function(req, res) {
     var thisCandidate = req.body;
     var jobsDatabase = req.app.get('jobsDatabase');
     
@@ -56,7 +56,7 @@ router.get('/getJobsByCompany/:query', function(req, res) {
             company_jobs.push(thisJob);
         }
     });
-    res.json(company_jobs);
+    res.json(jobsDatabase);
 });
 
 module.exports = router;
