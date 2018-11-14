@@ -7,15 +7,17 @@
 ## How To Install:
   * Download and Install [NPM](https://www.npmjs.com/) and [NodeJs] (https://nodejs.org/en/).
   * Clone this repository.
-  * Run ```
+  * Run on the root folder:
+```
     npm install
-    ```.
+```
   * Copy [moment.js](https://momentjs.com/downloads/moment.js) File to the '/node_modules' folder.
     
 ## How to Run:
-  * Go to the root folder, run:``` 
+  * To start the server, run on the root folder:
+``` 
     npm start
-    ```
+```
   * Open [this](http://localhost:8000) URL on your browser. If that doesn't work, try [this](http://localhost:9000).
 
 ## Salient Points:
