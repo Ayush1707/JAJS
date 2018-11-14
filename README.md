@@ -25,7 +25,6 @@
   * **Jobs Postings** can be done from the UI Directly. As mock data, 4 Job Postings are already added by the server.
   * All Job Postings are stored in an **array on the server**.
   * Any Candidate or **User** can open the URL and enter their credentials, along with their skills and experiences, to get the most relevant job offerings using **Match Score**.
-  * 
   >                Technologies Matched with User (with User Experience >= Experience Required)
   > Match Score = _____________________________________________________________________________ x 100
   >                         Total Number of Technologies Required for the Job
