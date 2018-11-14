@@ -6,12 +6,14 @@ var fs = require('fs');
 
 var match_threshold = 50;       //50% Match is minimum
 
+// Get All Jobs stored in the Database (Server Object Array)
 router.get('/allJobs', function(req, res) {
     //console.log("\nRetrieving all Data");
     var jobsDatabase = req.app.get('jobsDatabase');
     res.json(jobsDatabase);
 });
 
+// Helper Function to get 'Match Score' and 'Occurrences of Technologies' in the Job Description
 function compareEligibility(thisCandidate, thisJob){
     var occurrences = 0;
     for (var thisSkill in thisJob.skills_required){
@@ -43,6 +45,8 @@ function compareEligibility(thisCandidate, thisJob){
     return obj;
 }
 
+// Get Eligible Jobs from the Job Database, based on Posted Job's 
+// Required Skills and the Candidate's Skills.
 router.post('/eligibleJobs', function(req, res) {
     var thisCandidate = req.body;
     var jobsDatabase = req.app.get('jobsDatabase');
@@ -128,7 +132,7 @@ router.post('/eligibleJobs', function(req, res) {
     res.json(eligible_jobs);
 });
 
-
+// Get jobs based on search query on the 'Company Name'.
 router.get('/getJobsByCompany/:query', function(req, res) {
     var thisCompany = req.params.query;
     var jobsDatabase = req.app.get('jobsDatabase');

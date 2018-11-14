@@ -1,4 +1,4 @@
-var AppJAJS = angular.module("AppJAJS", ['ngMaterial', 'ngTable']) //'ngRoute', 'ngAnimate'
+var AppJAJS = angular.module("AppJAJS", ['ngMaterial', 'ngTable'])
 
 //================================ Configurations
 
