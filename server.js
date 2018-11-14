@@ -21,10 +21,14 @@ app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
+var jobsDatabase = [];        // Jobs Database
 
 // ======================== ROUTES
 var jobcreation = require('./app/routes/JobCreation.js', jobcreation);
 var jobsearch = require('./app/routes/JobSearch.js', jobsearch);
-app.use('/api/JobCreation',jobcreation);
+
+app.set('jobsDatabase', jobsDatabase);
+
+app.use('/api/JobCreation', jobcreation);
 app.use('/api/JobSearch', jobsearch);
 var server = app.listen(port);

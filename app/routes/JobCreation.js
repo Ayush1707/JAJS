@@ -10,48 +10,16 @@ function checkForValidity(job){
 
 router.post('/storeJob', function(req, res) {
     var new_job = req.body;
+    var jobsDatabase = req.app.get('jobsDatabase');
     var valid = checkForValidity(new_job);           //Add Validity of New Job
     if (valid) {
-        fs.exists('../../jobsDatabase.json', function(exists){
-            if(exists){
-                console.log("\nFile exists: Updating");
-                
-                fs.readFile('../../jobsDatabase.json', function readFileCallback(err, data) {
-                    if (err){
-                        console.log(err);
-                    } else {
-                        var db = JSON.parse(data).jobs;
-                        db.push(new_job);
-                        
-                        var obj = {
-                            'jobs': db 
-                        }
-                        fs.writeFile('../../jobsDatabase.json', JSON.stringify(obj)); 
-                        res.json(obj);
-                    }
-                });
-            } else {
-                console.log("\nFile doesn't exist: Creating & Updating");
-                var obj = {
-                    "jobs": [new_job]
-                }
-                fs.writeFile('../../jobsDatabase.json', JSON.stringify(obj));
-                res.json(obj);
-            }
-        });
+        console.log('\nSuccessful: Added new Job to the Database');
+        jobsDatabase.push(new_job);
+        req.app.set('jobsDatabase', jobsDatabase);
+        res.json(new_job);
     } else {
         console.log('\nError: New Job Invalid!');
     }
 });
-
-router.post('/clearDatabase', function(req, res) {
-    console.log("\nCreating Empty Database");
-    var obj = {
-        "jobs": []
-    }
-    fs.writeFile('../../jobsDatabase.json', JSON.stringify(obj));
-    res.json(obj);
-});
-
 
 module.exports = router;

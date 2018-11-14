@@ -1,3 +1,4 @@
+============================ Schemas
 Jobs: 
 {
     'title': "Software Engineer",
@@ -21,3 +22,35 @@ Users:
     
     // interested_title
 }
+
+============================ Examples
+POST: localhost:8000/api/JobCreation/storeJob
+{
+	"title": "Software Engineer",
+	"company": "Episource",
+	"location": "Mumbai",
+	"job_description": "As a software engineer, you're responsible to building new functionalities in the system, as well as adding more.",
+	"skills_required": {
+        "Javascript": 3, 
+        "Python": 2
+    }
+}
+
+GET: localhost:8000/api/JobSearch/allJobs
+
+POST: localhost:8000/api/JobSearch/selectedJobs
+{
+	"name": "Yash Nag",
+	"location": "Jaipur",
+	"preferred_title": ["Software Engineer"],
+	"skills": {
+		"Javascript": 3,
+		"Python": 1,
+		"C++": 5
+	}
+}
+
+
+POST: localhost:8000/api/JobCreation/clearDatabase
+
+
