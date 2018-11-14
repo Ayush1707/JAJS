@@ -22,4 +22,21 @@ router.post('/storeJob', function(req, res) {
     }
 });
 
+router.post('/deleteJob', function(req, res) {
+    var delete_job = req.body;
+    var jobsDatabase = req.app.get('jobsDatabase');
+    var found = false;
+    jobsDatabase.forEach(function(thisJob, i){
+       if (JSON.stringify(thisJob) === JSON.stringify(delete_job)){
+           found = true;
+           jobsDatabase.splice(i, 1);
+       }
+    });
+    if (found) {
+        console.log("\nSuccessful: Job Found and Deleted!");
+    } else {
+        console.log('\nError: Job Not Found!');
+    }
+});
+
 module.exports = router;
