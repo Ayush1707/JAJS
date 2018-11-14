@@ -11,7 +11,7 @@ Jobs:
     }
 }
 
-Users:
+yashu = 
 {
     'name': "Yash Nag",
     'location': "Jaipur",
@@ -19,9 +19,10 @@ Users:
         'Javscript': 6, 
         'C++': 5
     }
-    // interested_title
-    
+    // interested_title  
 }
+
+
 
 ============================ Examples
 POST: localhost:8000/api/JobCreation/storeJob

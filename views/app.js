@@ -100,14 +100,13 @@ AppJAJS.controller('postJobController',
     }
     
     $scope.job = {
-        title: "Angular Developer",
-        company: "Google",
-        location: "Banglore",
-        job_description: "Developing and improving Angular 1 Features and flow cycle.",
+        title: "",
+        company: "",
+        location: "",
+        job_description: "",
         skills_required: {
-            'ActionScript': 1
         },
-        application_url: "google.com/jobs"
+        application_url: ""
     }
 }]);
 
