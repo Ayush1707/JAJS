@@ -40,8 +40,11 @@ router.post('/eligibleJobs', function(req, res) {
         if (match_score >= match_threshold) {
             thisJob.match_score = match_score;
             eligible_jobs.push(thisJob);
+        } else {
+            console.log("Not Compatible: ", thisJob);
         }
     });
+    console.log(eligible_jobs);
     res.json(eligible_jobs);
 });
 

@@ -5,10 +5,10 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
-    <link rel="stylesheet"; href="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.css">
+    <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 </head>
-<body ng-controller="bodyController as ctrl" ng-cloak>
-    <div ng-controller="postJobController">
+<body ng-cloak>
+    <div ng-controller="postJobController as ctrl">
         <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding flex>
             <h2>Post Job Here!</h2>
             <div>
@@ -57,24 +57,24 @@
                 </md-autocomplete>
                 
                 <p>Experience you require for the Job (in Years):</p>
-                <div ng-repeat="item in required_skills"> 
+                <div ng-repeat="item in skills_required"> 
                     <div layout>
                         <div flex="10" layout layout-align="center center">
                             <span class="md-body-1">{{item}}:</span>
                         </div>
-                        <md-slider flex md-discrete ng-model="job.skills_required[item]" step="1" min="1" max="30" aria-label="rating">
+                        <md-slider flex md-discrete ng-model="job.skills_required[item]" step="1" min="0" max="30" aria-label="rating">
                         </md-slider>
                     </div>
                 </div>
                 
-                <button class="md-raised md-primary md-button md-ink-ripple" type="button" ng-click="postJob(job)">Post Job<div class="md-ripple-container" style=""></div></button>
+                <center><button class="md-raised md-primary md-button md-ink-ripple" type="button" ng-click="postJob(job)">Post Job<div class="md-ripple-container" style=""></div></button></center>
             </div>
       </md-content>
     </div>
     
     <md-divider ng-if="!$last"></md-divider>
     
-    <div ng-controller="searchJobsController">
+    <div ng-controller="searchJobsController as ctrl">
         <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding flex>
             <h2>Find Jobs Here!</h2>
             <div>
@@ -123,12 +123,34 @@
                         <div flex="10" layout layout-align="center center">
                             <span class="md-body-1">{{item}}:</span>
                         </div>
-                        <md-slider flex md-discrete ng-model="user.skills[item]" step="1" min="1" max="30" aria-label="rating">
+                        <md-slider flex md-discrete ng-model="user.skills[item]" step="1" min="0" max="30" aria-label="rating">
                         </md-slider>
                     </div>
                 </div>
                 
-                <button class="md-raised md-primary md-button md-ink-ripple" type="button" ng-click="getEligibleJobs(user)">Find Jobs<div class="md-ripple-container" style=""></div></button>
+                <center><button class="md-raised md-primary md-button md-ink-ripple" type="button" ng-click="getEligibleJobs(user)">Find Jobs<div class="md-ripple-container" style=""></div></button></center>
+                
+                <p>Matched Jobs:</p>
+                <table ng-table="vm.tableParams" class="table" show-filter="true">
+                    <tr ng-repeat="job in matched_jobs">
+                        <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+                        {{job.title}}</td>
+                        <td title="'Company'" filter="{ company: 'text'}" sortable="'company'">
+                        {{job.company}}</td>
+                        
+                        <td title="'Location'" filter="{ location: 'text'}" sortable="'location'">
+                        {{job.location}}</td>
+                        
+                        <td title="'Description'" filter="{ job_description: 'text'}" sortable="'job_description'">
+                        {{job.job_description}}</td>
+                        
+                        <td title="'Match Score'" filter="{ match_score: 'text'}" sortable="'match_score'">
+                        {{job.match_score}}%</td>
+                        
+                        <td title="'Apply'" filter="{ application_url: 'text'}" sortable="'application_url'">
+                        <a ng-href="{{job.application_url}}">Apply Here</a></td>
+                    </tr>
+                </table>
             </div>
         </md-content>
     </div>
@@ -141,7 +163,7 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.js"></script>
+    <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
     
     <script src="app.js"></script>
 </body>
